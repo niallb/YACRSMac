@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="YACRSPanelController">
+            <connections>
+                <outlet property="ExpandBtn" destination="oih-0g-gKK" id="nlb-aS-iXr"/>
+                <outlet property="QuID" destination="HpH-RJ-ZCb" id="ZIN-I4-2T0"/>
+                <outlet property="addTimeBtn" destination="Mg5-cX-691" id="VnL-n1-2RW"/>
+                <outlet property="captionLabel" destination="yLx-Wm-BoH" id="9Z8-a4-J38"/>
+                <outlet property="currentQuSel" destination="bXC-Re-eoF" id="e3L-Oa-g5G"/>
+                <outlet property="grapgBtn" destination="d92-Ba-0xo" id="eJ8-rD-CWd"/>
+                <outlet property="newQuBtn" destination="Pwp-CO-xd7" id="lsW-6X-8MV"/>
+                <outlet property="numberLabel" destination="Vdn-zb-Q5v" id="yag-E2-0N0"/>
+                <outlet property="window" destination="2" id="6"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" animationBehavior="default" id="2" customClass="YACRSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="131" y="74" width="240" height="50"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
+            <view key="contentView" id="3">
+                <rect key="frame" x="0.0" y="1" width="240" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button id="Dq3-T7-G9n">
+                        <rect key="frame" x="-1" y="26" width="26" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="NSStatusNone" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eDG-ng-6fQ">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system" size="10"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="closeBtn_Click:" target="-2" id="w6E-st-ZtV"/>
+                        </connections>
+                    </button>
+                    <button id="Mg5-cX-691">
+                        <rect key="frame" x="25" y="26" width="26" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Mh7-0r-LzO">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system" size="10"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="addTimeBtn_Click:" target="-2" id="kri-RB-Xv2"/>
+                        </connections>
+                    </button>
+                    <button id="Pwp-CO-xd7">
+                        <rect key="frame" x="48" y="8" width="45" height="42"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="NSSlideshowTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6ta-Pd-b95">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system" size="10"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="newQuBtn_Click:" target="-2" id="swr-j8-lpz"/>
+                        </connections>
+                    </button>
+                    <button id="d92-Ba-0xo">
+                        <rect key="frame" x="90" y="8" width="48" height="42"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="NSQuickLookTemplate" imagePosition="only" alignment="center" alternateImage="NSBluetoothTemplate" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nrQ-Xz-S2K">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system" size="10"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="graphBtn_Click:" target="-2" id="r7e-bt-xEN"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Vdn-zb-Q5v">
+                        <rect key="frame" x="133" y="19" width="109" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="999 (999)" id="2hN-6Y-TLB">
+                            <font key="font" metaFont="system" size="24"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="yLx-Wm-BoH">
+                        <rect key="frame" x="140" y="0.0" width="82" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Caption" id="ziL-At-GHd">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="HpH-RJ-ZCb">
+                        <rect key="frame" x="-1" y="5" width="56" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Q" id="hjM-pW-dGl">
+                            <font key="font" metaFont="system" size="19"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button id="oih-0g-gKK">
+                        <rect key="frame" x="48" y="-3" width="45" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NTE-KX-BWi">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="ExpandBtn_click:" target="-2" id="MEA-sO-3gf"/>
+                        </connections>
+                    </button>
+                    <comboBox verticalHuggingPriority="750" id="bXC-Re-eoF">
+                        <rect key="frame" x="50" y="-27" width="187" height="26"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="BYD-xh-LkR">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            <objectValues>
+                                <string>Item 1</string>
+                                <string>Item 2</string>
+                                <string>Item 3</string>
+                            </objectValues>
+                        </comboBoxCell>
+                        <connections>
+                            <action selector="currentQuSelChanged:" target="-2" id="60z-Xo-D4H"/>
+                        </connections>
+                    </comboBox>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="n5Z-Xl-G5G">
+                        <rect key="frame" x="-1" y="-23" width="52" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Qu.Type" id="pdn-r9-3aA">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="413" y="418"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="NSBluetoothTemplate" width="7" height="14"/>
+        <image name="NSQuickLookTemplate" width="21" height="16"/>
+        <image name="NSSlideshowTemplate" width="17" height="14"/>
+        <image name="NSStatusNone" width="16" height="16"/>
+    </resources>
+</document>
