@@ -1,13 +1,13 @@
-﻿
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MonoMac.Foundation;
-using MonoMac.AppKit;
+using Foundation;
+using AppKit;
 
 namespace YACRSMac
 {
-    public partial class graphDisplay : MonoMac.AppKit.NSPanel
+    public partial class graphDisplay : AppKit.NSPanel
     {
         public graphDisplayController theController;
         #region Constructors
@@ -49,8 +49,8 @@ namespace YACRSMac
         public override void MouseDragged(NSEvent e)
         {
             base.MouseDragged (e);
-            System.Drawing.PointF loc = this.Frame.Location;
-            System.Drawing.PointF tl = new System.Drawing.PointF(this.Frame.Top, this.Frame.Left);
+            CoreGraphics.CGPoint loc = this.Frame.Location;
+            CoreGraphics.CGPoint tl = new CoreGraphics.CGPoint(this.Frame.Top, this.Frame.Left);
 
             if (resizeArea.Frame.Contains(e.LocationInWindow))
             {
@@ -59,7 +59,7 @@ namespace YACRSMac
                 loc.Y -= e.DeltaY;
                 tl.Y += e.DeltaY;
      
-                this.SetContentSize(new System.Drawing.SizeF(this.Frame.Width+e.DeltaX, this.Frame.Height+e.DeltaY));
+                this.SetContentSize(new CoreGraphics.CGSize(this.Frame.Width+e.DeltaX, this.Frame.Height+e.DeltaY));
                 this.SetFrameOrigin(loc);
                 fixResize();
                 //this.SetFrameTopLeftPoint(tl);

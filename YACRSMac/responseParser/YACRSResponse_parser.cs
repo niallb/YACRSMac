@@ -123,6 +123,8 @@ namespace YACRScontrol
             StringReader sr = new StringReader(source);
             parser = new XmlTextReader(sr);
             the_YACRSResponse = null;
+            try
+            {
                 while (parser.Read())
                 {
                     switch (parser.NodeType)
@@ -149,7 +151,7 @@ namespace YACRScontrol
                             }
                             else
                             {
-                            if(tmpPart != null)
+                                if (tmpPart != null)
                                     tmpPart = tmpPart.startElement(elementid, atts2, parser.NamespaceURI, elementname);
                             }
                         if ((parser.IsEmptyElement) && (elementname.Equals(tmpPart.getElementName())))
@@ -175,7 +177,7 @@ namespace YACRScontrol
                             break;
                         case XmlNodeType.Whitespace:
                         case XmlNodeType.Text:
-                        if(tmpPart != null)
+                            if (tmpPart != null)
                                 tmpPart.content(parser.Value, containerids.Peek());
                             break;
                         default:
@@ -184,6 +186,11 @@ namespace YACRScontrol
                     }
                 }
                 return the_YACRSResponse;
+            }
+            catch(Exception e)
+            {
+                return null;
+            }
             }
         
 //USERCODE-SECTION-extraMethods-YACRSResponse_parser

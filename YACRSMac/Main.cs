@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Drawing;
-using MonoMac.Foundation;
-using MonoMac.AppKit;
-using MonoMac.ObjCRuntime;
+using AppKit;
+using ObjCRuntime;
 
 namespace YACRSMac
 {
-	class MainClass
+    static class MainClass
 	{
-		static void Main (string[] args)
+        static void Main(string[] args)
 		{
-            IntPtr h = Dlfcn.dlopen (MonoMac.Constants.CoreGraphicsLibrary, 0);
-			NSApplication.Init ();
-			NSApplication.Main (args);
+            IntPtr h = Dlfcn.dlopen (Constants.CoreGraphicsLibrary, 0);
+			NSApplication.Init();
+			NSApplication.Main(args);
             Dlfcn.dlclose (h);
 		}
 	}

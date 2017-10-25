@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 //using System.Data;
-using System.Drawing;
+using CoreGraphics;
 using System.Text;
 using System.Web;
 using System.Collections.Specialized;
-using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
+//using System.Drawing.Imaging;
+//using System.Drawing.Drawing2D;
 using System.Net;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -36,7 +36,7 @@ namespace YACRScontrol
 
         private static Regex versionParse = new Regex(@"\A([0-9]+)\.([0-9]+)(\.([0-9]+))");
 
-        private bool qis; // temp 
+        //private int qis; // temp 
 
         public static YACRSSession Instance
         {
@@ -77,6 +77,11 @@ namespace YACRScontrol
         public int LastQuInstanceID
         {
             get { return lastQiID; }
+        }
+
+        public string loginCookie
+        {
+            get { return cookies["yacrs_login"].Value; }
         }
 
         public void newSession()
@@ -211,10 +216,10 @@ namespace YACRScontrol
 
         public bool startNewQuestion()
         {
-            return startNewQuestion(new PointF(-1,-1));
+            return startNewQuestion(new CGPoint(-1,-1));
         }
 
-        public bool startNewQuestion(PointF containing)
+        public bool startNewQuestion(CGPoint containing)
         {
             NameValueCollection formData = new NameValueCollection();
             formData.Add("action", "activate");
@@ -238,8 +243,11 @@ namespace YACRScontrol
             return true;
         }
 
-        public cls_questionResponseInfo questionInfo()
+        public cls_questionResponseInfo questionInfo(bool getFullInfo)
         {
+            if ((!getFullInfo) && ((serverMajorVer > 1) || ((serverMajorVer == 1) && (serverMinorVer > 1))))
+                return questionInfoShort();
+            else
             return questionInfo(0);
         }
             
@@ -248,17 +256,36 @@ namespace YACRScontrol
             NameValueCollection formData = new NameValueCollection();
             formData.Add("action", "quinfo");
             formData.Add("id", currentSessionDetail.M_id.ToString());
-            if(qiID>0)
+            if (qiID > 0)
                 formData.Add("qiID", qiID.ToString());
             string xml = httpRequest(formData, null, null, null);
-            if (qis==false)  // Temp variable that limits number of times this is displayed for debugging
-            {
-                qis = true;
-                //Console.WriteLine(xml);
-                //MessageBox.Show(xml);
-            }
+            //if (qis==0)  // Temp variable that limits number of times this is displayed for debugging
+            // {
+            //    qis = 100;
+            //Console.WriteLine(xml);
+            //     MessageBox.Show(xml);
+            // }
+            // qis--;
+
             cls_YACRSResponse r = responseParser.parseIn(xml);
-            if ((r!=null)&&(r.M_data.M_questionResponseInfo.Count > 0))
+            if ((r != null) && (r.M_data.M_questionResponseInfo.Count > 0))
+            {
+                if (r.M_data.M_questionResponseInfo[0].M_id != 0)
+                    lastQiID = r.M_data.M_questionResponseInfo[0].M_id;
+                return r.M_data.M_questionResponseInfo[0];
+            }
+            else
+                return null;
+            }
+
+        public cls_questionResponseInfo questionInfoShort()
+        {
+            NameValueCollection formData = new NameValueCollection();
+            formData.Add("action", "quinfoshort");
+            formData.Add("id", currentSessionDetail.M_id.ToString());
+            string xml = httpRequest(formData, null, null, null);
+            cls_YACRSResponse r = responseParser.parseIn(xml);
+            if ((r != null) && (r.M_data.M_questionResponseInfo.Count > 0))
             { 
                 if (r.M_data.M_questionResponseInfo[0].M_id != 0)
                     lastQiID = r.M_data.M_questionResponseInfo[0].M_id;

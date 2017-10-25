@@ -1,14 +1,14 @@
-﻿
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MonoMac.Foundation;
-using MonoMac.AppKit;
+using Foundation;
+using AppKit;
 using YACRScontrol;
 
 namespace YACRSMac
 {
-    public partial class graphDisplayController : MonoMac.AppKit.NSWindowController
+    public partial class graphDisplayController : AppKit.NSWindowController
     {
         private graphView theGraph;
 
@@ -59,7 +59,7 @@ namespace YACRSMac
             float h = NSUserDefaults.StandardUserDefaults.FloatForKey("graphDisplayH");
             if ((w > 0) && (h > 0))
             {
-                System.Drawing.RectangleF restoreTo = new System.Drawing.RectangleF(x, y, w, h);
+                CoreGraphics.CGRect restoreTo = new CoreGraphics.CGRect(x, y, w, h);
                 tmp.SetFrame(restoreTo, false);
                 resizeGraph();
             }
@@ -83,7 +83,7 @@ namespace YACRSMac
             theGraph.Display();
         }
 
-        partial void backBtn_Click (MonoMac.Foundation.NSObject sender)
+        partial void backBtn_Click (Foundation.NSObject sender)
         {
             quids = YACRSSession.Instance.getSessionQuestionIDs();
             int nidx = quids.IndexOf(cqid)-1;
@@ -93,16 +93,16 @@ namespace YACRSMac
             setData(ri);
         }
 
-        partial void closeBtn_Click (MonoMac.Foundation.NSObject sender)
+        partial void closeBtn_Click (Foundation.NSObject sender)
         {
-            NSUserDefaults.StandardUserDefaults.SetFloat(this.Window.Frame.X, "graphDisplayX");
-            NSUserDefaults.StandardUserDefaults.SetFloat(this.Window.Frame.Y, "graphDisplayY");
-            NSUserDefaults.StandardUserDefaults.SetFloat(this.Window.Frame.Width, "graphDisplayW");
-            NSUserDefaults.StandardUserDefaults.SetFloat(this.Window.Frame.Height, "graphDisplayH");
+			NSUserDefaults.StandardUserDefaults.SetFloat((float)this.Window.Frame.X, "graphDisplayX");
+            NSUserDefaults.StandardUserDefaults.SetFloat((float)this.Window.Frame.Y, "graphDisplayY");
+            NSUserDefaults.StandardUserDefaults.SetFloat((float)this.Window.Frame.Width, "graphDisplayW");
+            NSUserDefaults.StandardUserDefaults.SetFloat((float)this.Window.Frame.Height, "graphDisplayH");
             this.Window.Close();
         }
 
-        partial void forwardBtn_Click (MonoMac.Foundation.NSObject sender)
+        partial void forwardBtn_Click (Foundation.NSObject sender)
         {
             quids = YACRSSession.Instance.getSessionQuestionIDs();
             int nidx = quids.IndexOf(cqid)+1;

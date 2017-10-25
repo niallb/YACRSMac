@@ -3,14 +3,14 @@ using System;
 using System.Timers;
 using System.Collections.Generic;
 using System.Linq;
-using System.Drawing;
-using MonoMac.Foundation;
-using MonoMac.AppKit;
+using CoreGraphics;
+using Foundation;
+using AppKit;
 using YACRScontrol;
 
 namespace YACRSMac
 {
-    public partial class YACRSPanelController : MonoMac.AppKit.NSWindowController
+    public partial class YACRSPanelController : AppKit.NSWindowController
     {
         public MainWindowController mainController;
         private bool inQuestion;
@@ -67,7 +67,7 @@ namespace YACRSMac
 
         #endregion
 
-        partial void closeBtn_Click (MonoMac.Foundation.NSObject sender)
+        partial void closeBtn_Click (Foundation.NSObject sender)
         {
             //mainController.Window.Display();
             mainController.Window.MakeKeyAndOrderFront(sender);
@@ -76,7 +76,7 @@ namespace YACRSMac
 
         }
 
-        partial void graphBtn_Click (MonoMac.Foundation.NSObject sender)
+        partial void graphBtn_Click (Foundation.NSObject sender)
         {
             if(myGraphCtrl == null)
             {
@@ -92,11 +92,11 @@ namespace YACRSMac
              //myGraphCtrl.mainController = this;
         }
 
-        partial void newQuBtn_Click (MonoMac.Foundation.NSObject sender)
+        partial void newQuBtn_Click (Foundation.NSObject sender)
         {
             if (!inQuestion)
             {
-                YACRSSession.Instance.startNewQuestion(new System.Drawing.PointF(Window.Frame.Left, Window.Frame.Top));
+                YACRSSession.Instance.startNewQuestion(new CGPoint(Window.Frame.Left, Window.Frame.Top));
                 setInQuestion(true);
             }
             else
@@ -107,7 +107,7 @@ namespace YACRSMac
 
         }
 
-        partial void ExpandBtn_click (MonoMac.Foundation.NSObject sender)
+        partial void ExpandBtn_click (Foundation.NSObject sender)
         {
             int currentQuSelID = 0;
             currentQuSel.RemoveAll();
@@ -115,12 +115,12 @@ namespace YACRSMac
             {
                 currentQuSel.Add (new NSString[] {(NSString)(qt.ToString())});
                 if (qt.M_id == YACRSSession.Instance.DefaultQuID)
-                    currentQuSelID = currentQuSel.Count - 1;
+                    currentQuSelID = (int)(currentQuSel.Count - 1);
             }
             if (currentQuSel.Count > 0)
                 currentQuSel.SelectItem(currentQuSelID);
 
-            RectangleF r = Window.Frame;
+            CGRect r = Window.Frame;
             if(expanded)
             {
                 expanded = false;
@@ -136,16 +136,16 @@ namespace YACRSMac
             Window.SetFrame(r, true);
         }
 
-        partial void currentQuSelChanged (MonoMac.Foundation.NSObject sender)
+        partial void currentQuSelChanged (Foundation.NSObject sender)
         {
             if(expanded)
             {
-                YACRSSession.Instance.DefaultQuID = YACRSSession.Instance.AvailableQus[currentQuSel.SelectedIndex].M_id;
+				YACRSSession.Instance.DefaultQuID = YACRSSession.Instance.AvailableQus[(int)currentQuSel.SelectedIndex].M_id;
                 ExpandBtn_click(sender);
             }
         }
 
-        partial void addTimeBtn_Click (MonoMac.Foundation.NSObject sender)
+        partial void addTimeBtn_Click (Foundation.NSObject sender)
         {
             YACRSSession.Instance.addTime();
         }
@@ -175,7 +175,7 @@ namespace YACRSMac
 
         private void updateInfoDisplay()
         {
-            cls_questionResponseInfo ri = YACRSSession.Instance.questionInfo();
+            cls_questionResponseInfo ri = YACRSSession.Instance.questionInfo(true);
             if (ri != null)
             {
                 if (ri.M_id > 0)

@@ -2,12 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MonoMac.Foundation;
-using MonoMac.AppKit;
+using Foundation;
+using AppKit;
 
 namespace YACRSMac
 {
-	public partial class loginForm3 : MonoMac.AppKit.NSWindow
+	public partial class loginForm3 : AppKit.NSWindow
 	{
 		#region Constructors
 

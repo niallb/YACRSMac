@@ -2,12 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MonoMac.Foundation;
-using MonoMac.AppKit;
+using Foundation;
+using AppKit;
 
 namespace YACRSMac
 {
-    public partial class YACRSPanel : MonoMac.AppKit.NSPanel
+    public partial class YACRSPanel : AppKit.NSPanel
     {
         public YACRSPanelController Controller;
         #region Constructors
@@ -45,7 +45,7 @@ namespace YACRSMac
         {
             base.MouseDragged (e);
             //Console.WriteLine("Mouse dragged " + e.AbsoluteX.ToString()+" delta "+e.DeltaX.ToString());
-            System.Drawing.PointF loc = this.Frame.Location;
+            CoreGraphics.CGPoint loc = this.Frame.Location;
             loc.X += e.DeltaX;
             loc.Y -= e.DeltaY;
             this.SetFrameOrigin(loc);

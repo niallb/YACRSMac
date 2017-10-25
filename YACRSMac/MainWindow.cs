@@ -1,15 +1,15 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using MonoMac.Foundation;
-using MonoMac.AppKit;
+using Foundation;
+using AppKit;
 using System.Timers;
 using YACRScontrol;
 
 
 namespace YACRSMac
 {
-	public partial class MainWindow : MonoMac.AppKit.NSWindow
+	public partial class MainWindow : AppKit.NSWindow
 	{
 		MainWindowController theController;
 		#region Constructors

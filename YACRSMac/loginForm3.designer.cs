@@ -4,7 +4,7 @@
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoMac.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace YACRSMac
@@ -13,25 +13,25 @@ namespace YACRSMac
 	partial class loginForm3Controller
 	{
 		[Outlet]
-		MonoMac.AppKit.NSTextField messageEdt { get; set; }
+		AppKit.NSTextField messageEdt { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSSecureTextField PasswordEdt { get; set; }
+		AppKit.NSSecureTextField PasswordEdt { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSTextField URLEdt { get; set; }
+		AppKit.NSTextField URLEdt { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSTextField UsernameEdt { get; set; }
+		AppKit.NSTextField UsernameEdt { get; set; }
 
 		[Action ("onCancel:")]
-		partial void onCancel (MonoMac.Foundation.NSObject sender);
+		partial void onCancel (Foundation.NSObject sender);
 
 		[Action ("onOK:")]
-		partial void onOK (MonoMac.Foundation.NSObject sender);
+		partial void onOK (Foundation.NSObject sender);
 
 		[Action ("onURL:")]
-		partial void onURL (MonoMac.Foundation.NSObject sender);
+		partial void onURL (Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

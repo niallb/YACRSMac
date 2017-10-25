@@ -10,6 +10,7 @@ using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.Net;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace YACRScontrol
 {
@@ -20,6 +21,7 @@ namespace YACRScontrol
         private static readonly Encoding encoding = Encoding.UTF8;
         private static YACRSResponse_parser responseParser = new YACRSResponse_parser();
         private string serverURL;
+        public string baseURL { get; private set; }
         private CookieCollection cookies;
         private cls_sessionDetail currentSessionDetail;
         private bool courseIdSupported;
@@ -28,6 +30,11 @@ namespace YACRScontrol
         private int lastQiID;
         private bool serverOK;
         private string lastError;
+
+        public int serverMajorVer { get; private set; }
+        public int serverMinorVer { get; private set; }
+
+        private static Regex versionParse = new Regex(@"\A([0-9]+)\.([0-9]+)(\.([0-9]+))");
 
         private bool qis; // temp 
 
@@ -93,19 +100,39 @@ namespace YACRScontrol
                 lastQiID = 0;
         }
 
-        public string SetAndCheckURL(string url)
+        public string SetAndCheckURL(string url, out string nurl)
         {
-            serverURL = url + "services.php";
+            char[] charsToTrim = {' ' , '\t', '/', '\\', ':', '?' };
+            string tidiedUrl = url.Trim(charsToTrim) + "/";
+            if (tidiedUrl.IndexOf("http") != 0)
+                tidiedUrl = "http://" + tidiedUrl;
+
+            serverURL = tidiedUrl + "services.php";
             string xml = httpRequest(null, null, null, null);
             cls_YACRSResponse r = responseParser.parseIn(xml);
             if (r == null)
             {
                 serverOK = false;
+                baseURL = null;
+                nurl = url;
                 return "Incorrect URL";
             }
             else
             {
+                nurl = serverURL.Substring(0, serverURL.IndexOf("services.php"));
                 serverOK = true;
+                baseURL = tidiedUrl;
+                Match ver = versionParse.Match(r.M_version);
+                if (ver.Success)
+                {
+                    serverMajorVer = int.Parse(ver.Groups[1].Value);
+                    serverMinorVer = int.Parse(" " + ver.Groups[2].Value + " ");
+                }
+                else
+                {
+                    serverMajorVer = 0;
+                    serverMinorVer = 0;
+                }
                 return "YACRS version " + r.M_version;
             }
         }
@@ -296,6 +323,7 @@ namespace YACRScontrol
             {
                 ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverURL);
+                request.AllowAutoRedirect = true;
                 CookieContainer cookieContainer = new CookieContainer();
                 if (cookies != null)
                     cookieContainer.Add(cookies);
@@ -344,6 +372,7 @@ namespace YACRScontrol
                 }
 
                 Stream objStream = request.GetResponse().GetResponseStream();
+                serverURL = request.GetResponse().ResponseUri.ToString();
                 using (StreamReader objReader = new StreamReader(objStream))
                 {
                     string sLine = "";

@@ -1,4 +1,4 @@
-﻿/* cls_globalQuType.cs */
+/* cls_globalQuType.cs */
 using System;
 using System.Collections.Generic;
 

@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
-using MonoMac.Foundation;
-using MonoMac.AppKit;
+using CoreGraphics;
+using Foundation;
+using AppKit;
 
 namespace YACRSMac
 {
-    public class graphView : MonoMac.AppKit.NSView
+    public class graphView : AppKit.NSView
     {
         public Dictionary<string, int> theData;
         public string title;
@@ -15,7 +15,7 @@ namespace YACRSMac
         {
         }
 
-        public override void DrawRect (RectangleF dirtyRect)
+        public override void DrawRect (CGRect dirtyRect)
         {
             NSColor.White.Set();
             NSGraphics.RectFill(this.VisibleRect());
@@ -39,7 +39,7 @@ namespace YACRSMac
 
         }
 
-        private SizeF textSize(string str, NSDictionary attributes)
+        private CGSize textSize(string str, NSDictionary attributes)
         {
             // The three components
             var storage   = new NSTextStorage ();
@@ -56,7 +56,7 @@ namespace YACRSMac
             layout.GetGlyphRange (container);
 
             // Get size
-            SizeF size = layout.GetUsedRectForTextContainer (container).Size;
+            CGSize size = layout.GetUsedRectForTextContainer (container).Size;
             return size;
 
         }
@@ -65,14 +65,14 @@ namespace YACRSMac
         {
             color.Set();
             NSString tmp = new NSString(str);
-            tmp.DrawString(new PointF(xpos, ypos), fontInfo);
+            tmp.DrawString(new CGPoint(xpos, ypos), fontInfo);
         }
 
         private void OnPaint()
         {
             int textHeight = (int)(this.Frame.Height / 15);
             var objects = new object [] { NSFont.FromFontName("Menlo", textHeight) };
-            var keys = new object [] { NSAttributedString.FontAttributeName };
+            var keys = new object [] { "Helvetica" };
             NSDictionary txtFont = NSDictionary.FromObjectsAndKeys(objects, keys);
 
             if ((theData != null) && (theData.Count > 0))
@@ -85,17 +85,17 @@ namespace YACRSMac
                     maxval = (dp.Value > maxval) ? dp.Value : maxval;
                 }
                 int baseline = (int)(2 * textHeight);
-                float heightMultiplier = (this.Frame.Height - (4 * textHeight)) / maxval;
-                SizeF stringSize = textSize(maxval.ToString(), txtFont);
+				float heightMultiplier = ((float)this.Frame.Height - (4 * textHeight)) / maxval;
+                CGSize stringSize = textSize(maxval.ToString(), txtFont);
                 int lxpos = colWidth - (int)stringSize.Width - 10;
                 int lypos = (int)(baseline + (heightMultiplier * maxval) - (stringSize.Height / 2));
                 DrawString(maxval.ToString(), txtFont, NSColor.Black, lxpos, lypos);
 
 
                 NSColor.Black.Set();
-                NSBezierPath.StrokeLine(new PointF(colWidth, baseline), new PointF(colWidth * (theData.Count + 1), baseline));
-                NSBezierPath.StrokeLine(new PointF(colWidth, baseline), new PointF(colWidth, baseline + (heightMultiplier * maxval)));
-                NSBezierPath.StrokeLine(new PointF(colWidth - 5, baseline + (heightMultiplier * maxval)), new PointF(colWidth, baseline + (heightMultiplier * maxval)));
+                NSBezierPath.StrokeLine(new CGPoint(colWidth, baseline), new CGPoint(colWidth * (theData.Count + 1), baseline));
+                NSBezierPath.StrokeLine(new CGPoint(colWidth, baseline), new CGPoint(colWidth, baseline + (heightMultiplier * maxval)));
+                NSBezierPath.StrokeLine(new CGPoint(colWidth - 5, baseline + (heightMultiplier * maxval)), new CGPoint(colWidth, baseline + (heightMultiplier * maxval)));
 
                 DrawString(title, txtFont, NSColor.Black, 5, lypos + (int)stringSize.Height);
 
@@ -110,7 +110,7 @@ namespace YACRSMac
                     DrawString(dp.Key, txtFont, NSColor.Black, lxpos, lypos);
                     if (dp.Value > 0)
                     {
-                        RectangleF colRect = new RectangleF(colPos, baseline, colWidth - 1, heightMultiplier * dp.Value);
+                        CGRect colRect = new CGRect(colPos, baseline, colWidth - 1, heightMultiplier * dp.Value);
                         NSColor.Blue.Set();
                         NSGraphics.RectFill(colRect);
                         NSColor.Black.Set();
@@ -123,7 +123,7 @@ namespace YACRSMac
             }
             else
             {
-                SizeF stringSize = textSize("Ay", txtFont);
+                CGSize stringSize = textSize("Ay", txtFont);
                 int lypos = (int)this.Frame.Height - 2 * (int)stringSize.Height;
                 if(title != null)
                     DrawString(title, txtFont, NSColor.Black, 5, lypos + (int)stringSize.Height);

@@ -1,4 +1,4 @@
-﻿/* cls_sessionInfo.cs */
+/* cls_sessionInfo.cs */
 using System;
 using System.Collections.Generic;
 

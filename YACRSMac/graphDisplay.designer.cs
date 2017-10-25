@@ -4,7 +4,7 @@
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoMac.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace YACRSMac
@@ -13,34 +13,34 @@ namespace YACRSMac
 	partial class graphDisplayController
 	{
 		[Outlet]
-		MonoMac.AppKit.NSButton backBtn { get; set; }
+		AppKit.NSButton backBtn { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSButton forwardBtn { get; set; }
+		AppKit.NSButton forwardBtn { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSBox graphBox { get; set; }
+		AppKit.NSBox graphBox { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSView placeHolder { get; set; }
+		AppKit.NSView placeHolder { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSView placeHolder2 { get; set; }
+		AppKit.NSView placeHolder2 { get; set; }
 
 		[Outlet]
-		MonoMac.WebKit.WebView quWebInfo { get; set; }
+		WebKit.WebView quWebInfo { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSImageView resizeArea { get; set; }
+		AppKit.NSImageView resizeArea { get; set; }
 
 		[Action ("backBtn_Click:")]
-		partial void backBtn_Click (MonoMac.Foundation.NSObject sender);
+		partial void backBtn_Click (Foundation.NSObject sender);
 
 		[Action ("closeBtn_Click:")]
-		partial void closeBtn_Click (MonoMac.Foundation.NSObject sender);
+		partial void closeBtn_Click (Foundation.NSObject sender);
 
 		[Action ("forwardBtn_Click:")]
-		partial void forwardBtn_Click (MonoMac.Foundation.NSObject sender);
+		partial void forwardBtn_Click (Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
@@ -85,7 +85,7 @@ namespace YACRSMac
 	partial class graphDisplay
 	{
 		[Outlet]
-		MonoMac.AppKit.NSImageView resizeArea { get; set; }
+		AppKit.NSImageView resizeArea { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{

@@ -2,17 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using MonoMac.Foundation;
-using MonoMac.AppKit;
+using Foundation;
+using AppKit;
 
-using MonoMac.CoreGraphics;
-using System.Drawing;
-using System.Drawing.Imaging;
+using CoreGraphics;
+//using System.Drawing.Imaging;
 using YACRScontrol;
 
 namespace YACRSMac
 {
-	public partial class MainWindowController : MonoMac.AppKit.NSWindowController
+	public partial class MainWindowController : AppKit.NSWindowController
 	{
 		public MainWindow theWindow;
         YACRSPanelController myPanelControl;
@@ -37,7 +36,7 @@ namespace YACRSMac
 		[Export ("initWithCoder:")]
 		public MainWindowController (NSCoder coder) : base (coder)
 		{
-			Initialize ();
+			Initialize (coder);
 		}
 		
 		// Call to load from the XIB/NIB file
@@ -46,10 +45,17 @@ namespace YACRSMac
 			Initialize ();
 			//Console.WriteLine ("Window controller initialised");
 		}
-		
+
 		// Shared initialization code
-		void Initialize ()
+		void Initialize()
 		{
+			state = formState.nodata;
+		}
+
+		// Shared initialization code
+		void Initialize(NSCoder coder)
+		{
+            theWindow = new MainWindow(coder);
 			state = formState.nodata;
 		}
 
@@ -58,7 +64,10 @@ namespace YACRSMac
 		//strongly typed window accessor
 		public new MainWindow Window {
 			get {
-				return (MainWindow)base.Window;
+                if (theWindow != null)
+                    return theWindow;
+                else
+                    return (MainWindow)base.Window;
 			}
 		}
 
@@ -69,12 +78,12 @@ namespace YACRSMac
 			} else {
 				courseIdentifierEdt.Enabled = false;
 			}
-            int defaultQuID = NSUserDefaults.StandardUserDefaults.IntForKey("defaultQuID");
+			int defaultQuID = (int)NSUserDefaults.StandardUserDefaults.IntForKey("defaultQuID");
             int defaultQuSelID = 0;
 			foreach (cls_globalQuType qt in YACRSSession.Instance.AvailableQus) {
 				DefaultQuSel.Add (new NSString[] {(NSString)(qt.ToString())});
                 if (qt.M_id == defaultQuID)
-                    defaultQuSelID = DefaultQuSel.Count - 1;
+					defaultQuSelID = (int)DefaultQuSel.Count - 1;
 			}
 			if (DefaultQuSel.Count > 0)
                 DefaultQuSel.SelectItem(defaultQuSelID);
@@ -89,11 +98,11 @@ namespace YACRSMac
             enableAppropriateComponents ();
 		}
 
-        partial void startBtn_Click (MonoMac.Foundation.NSObject sender)
+        partial void startBtn_Click (Foundation.NSObject sender)
         {
-            YACRSSession.Instance.DefaultQuID = YACRSSession.Instance.AvailableQus[DefaultQuSel.SelectedIndex].M_id;
+			YACRSSession.Instance.DefaultQuID = YACRSSession.Instance.AvailableQus[(int)DefaultQuSel.SelectedIndex].M_id;
             NSUserDefaults.StandardUserDefaults.SetInt(YACRSSession.Instance.DefaultQuID, "defaultQuID");
-            NSUserDefaults.StandardUserDefaults.SetInt(sessions[sessionListSel.SelectedIndex].M_id, "sessionID");
+			NSUserDefaults.StandardUserDefaults.SetInt(sessions[(int)sessionListSel.SelectedIndex].M_id, "sessionID");
             YACRSSession.Instance.StartSession();
             if(myPanelControl==null)
                 myPanelControl = new YACRSPanelController();
@@ -108,7 +117,7 @@ namespace YACRSMac
             this.Window.Miniaturize(sender);
         }
 
-		partial void onCancel (MonoMac.Foundation.NSObject sender)
+		partial void onCancel (Foundation.NSObject sender)
 		{
             if(state == formState.unsaved)
             {
@@ -130,28 +139,28 @@ namespace YACRSMac
             }
 		}
 
-		partial void OnGrabScreen (MonoMac.AppKit.NSButton sender)
+		partial void OnGrabScreen (AppKit.NSButton sender)
 		{
 		}
 
-		partial void OnListSelection (MonoMac.Foundation.NSObject sender)
+		partial void OnListSelection (Foundation.NSObject sender)
 		{
             //Console.WriteLine("OnListSelection");
 		}
 
-		partial void onOK (MonoMac.Foundation.NSObject sender)
+		partial void onOK (Foundation.NSObject sender)
 		{
             int tmpint;
             YACRSSession.Instance.Detail.M_title = titleEdt.StringValue;
             YACRSSession.Instance.Detail.M_allowGuests = allowGuestsChk.State == NSCellStateValue.On ? true : false;
             YACRSSession.Instance.Detail.M_visible = visibleChk.State == NSCellStateValue.On ? true : false;
-            YACRSSession.Instance.Detail.M_questionMode = (cls_sessionDetail.qmode)questionModeSel.SelectedIndex;
+			YACRSSession.Instance.Detail.M_questionMode = (cls_sessionDetail.qmode)(int)questionModeSel.SelectedIndex;
             if(int.TryParse(defaultQuActiveSecs.StringValue, out tmpint))
                 YACRSSession.Instance.Detail.M_defaultQuActiveSecs = tmpint;
             else
                 YACRSSession.Instance.Detail.M_defaultQuActiveSecs = 0;
             YACRSSession.Instance.Detail.M_allowQuReview = allowQuReviewChk.State == NSCellStateValue.On ? true : false;
-            YACRSSession.Instance.Detail.M_ublogRoom = (cls_sessionDetail.ublogmode)ublogRoomSel.SelectedIndex;
+			YACRSSession.Instance.Detail.M_ublogRoom = (cls_sessionDetail.ublogmode)(int)ublogRoomSel.SelectedIndex;
             if(int.TryParse(maxMessageLenghtEdt.StringValue, out tmpint))
                 YACRSSession.Instance.Detail.M_maxMessagelength = tmpint;
             else
@@ -166,7 +175,7 @@ namespace YACRSMac
             enableAppropriateComponents();
 		}
 
-        partial void newSessionBtn_Click (MonoMac.Foundation.NSObject sender)
+        partial void newSessionBtn_Click (Foundation.NSObject sender)
         {
             YACRSSession.Instance.newSession();
             state = formState.unsaved;
@@ -174,7 +183,7 @@ namespace YACRSMac
             enableAppropriateComponents();
         }
 
-        partial void settingChanged (MonoMac.Foundation.NSObject sender)
+        partial void settingChanged (Foundation.NSObject sender)
         {
             if(!updatingSettings)
             {
@@ -186,9 +195,9 @@ namespace YACRSMac
             }
         }
 
-		partial void OnSelectSession (MonoMac.Foundation.NSObject sender)
+		partial void OnSelectSession (Foundation.NSObject sender)
 		{
-            int idx = sessionListSel.SelectedIndex;
+			int idx = (int)sessionListSel.SelectedIndex;
             //Console.WriteLine("Session "+idx.ToString()+" - "+sessions[idx].M_title);
             if((idx >=0)&&(idx < sessions.Count)) 
             {
@@ -242,7 +251,7 @@ namespace YACRSMac
 
 		private void RefreshList()
 		{
-            int defaultSessionID = NSUserDefaults.StandardUserDefaults.IntForKey("sessionID");
+			int defaultSessionID = (int)NSUserDefaults.StandardUserDefaults.IntForKey("sessionID");
 			sessions = YACRSSession.Instance.getSessionList();
 			sessionListSel.RemoveAll ();
 			foreach (cls_sessionInfo s in sessions)

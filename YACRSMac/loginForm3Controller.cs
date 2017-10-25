@@ -1,14 +1,14 @@
-﻿
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using MonoMac.Foundation;
-using MonoMac.AppKit;
+using Foundation;
+using AppKit;
 using YACRScontrol;
 
 namespace YACRSMac
 {
-	public partial class loginForm3Controller : MonoMac.AppKit.NSWindowController
+	public partial class loginForm3Controller : AppKit.NSWindowController
 	{
 		#region Constructors
 
@@ -46,13 +46,13 @@ namespace YACRSMac
 			}
 		}
 
-		partial void onCancel (MonoMac.Foundation.NSObject sender)
+		partial void onCancel (Foundation.NSObject sender)
 		{
 			NSApplication.SharedApplication.StopModalWithCode(0);
 			Window.Close();
 		}
 
-		partial void onOK (MonoMac.Foundation.NSObject sender)
+		partial void onOK (Foundation.NSObject sender)
 		{
 			messageEdt.TextColor = NSColor.Black;
 			messageEdt.StringValue = "Logging in";
@@ -84,7 +84,7 @@ namespace YACRSMac
             }
 		}
 
-		partial void onURL (MonoMac.Foundation.NSObject sender)
+		partial void onURL (Foundation.NSObject sender)
 		{
 			messageEdt.TextColor = NSColor.Black;
 			//Console.WriteLine("URL Event?");

@@ -4,7 +4,7 @@
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoMac.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace YACRSMac
@@ -13,46 +13,46 @@ namespace YACRSMac
 	partial class YACRSPanelController
 	{
 		[Outlet]
-		MonoMac.AppKit.NSButton addTimeBtn { get; set; }
+		AppKit.NSButton addTimeBtn { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSTextField captionLabel { get; set; }
+		AppKit.NSTextField captionLabel { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSComboBox currentQuSel { get; set; }
+		AppKit.NSComboBox currentQuSel { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSButton ExpandBtn { get; set; }
+		AppKit.NSButton ExpandBtn { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSButton grapgBtn { get; set; }
+		AppKit.NSButton grapgBtn { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSButton newQuBtn { get; set; }
+		AppKit.NSButton newQuBtn { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSTextField numberLabel { get; set; }
+		AppKit.NSTextField numberLabel { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSTextField QuID { get; set; }
+		AppKit.NSTextField QuID { get; set; }
 
 		[Action ("addTimeBtn_Click:")]
-		partial void addTimeBtn_Click (MonoMac.Foundation.NSObject sender);
+		partial void addTimeBtn_Click (Foundation.NSObject sender);
 
 		[Action ("closeBtn_Click:")]
-		partial void closeBtn_Click (MonoMac.Foundation.NSObject sender);
+		partial void closeBtn_Click (Foundation.NSObject sender);
 
 		[Action ("currentQuSelChanged:")]
-		partial void currentQuSelChanged (MonoMac.Foundation.NSObject sender);
+		partial void currentQuSelChanged (Foundation.NSObject sender);
 
 		[Action ("ExpandBtn_click:")]
-		partial void ExpandBtn_click (MonoMac.Foundation.NSObject sender);
+		partial void ExpandBtn_click (Foundation.NSObject sender);
 
 		[Action ("graphBtn_Click:")]
-		partial void graphBtn_Click (MonoMac.Foundation.NSObject sender);
+		partial void graphBtn_Click (Foundation.NSObject sender);
 
 		[Action ("newQuBtn_Click:")]
-		partial void newQuBtn_Click (MonoMac.Foundation.NSObject sender);
+		partial void newQuBtn_Click (Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{

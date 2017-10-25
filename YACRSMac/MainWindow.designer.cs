@@ -4,7 +4,7 @@
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoMac.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace YACRSMac
@@ -13,76 +13,76 @@ namespace YACRSMac
 	partial class MainWindowController
 	{
 		[Outlet]
-		MonoMac.AppKit.NSButton allowGuestsChk { get; set; }
+		AppKit.NSButton allowGuestsChk { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSButton allowQuReviewChk { get; set; }
+		AppKit.NSButton allowQuReviewChk { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSButton allowTeacherQuChk { get; set; }
+		AppKit.NSButton allowTeacherQuChk { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSButton cancelBtn { get; set; }
+		AppKit.NSButton cancelBtn { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSTextField courseIdentifierEdt { get; set; }
+		AppKit.NSTextField courseIdentifierEdt { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSTextField defaultQuActiveSecs { get; set; }
+		AppKit.NSTextField defaultQuActiveSecs { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSComboBox DefaultQuSel { get; set; }
+		AppKit.NSComboBox DefaultQuSel { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSTextField maxMessageLenghtEdt { get; set; }
+		AppKit.NSTextField maxMessageLenghtEdt { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSButton newSessionBtn { get; set; }
+		AppKit.NSButton newSessionBtn { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSButton OKBtn { get; set; }
+		AppKit.NSButton OKBtn { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSComboBox questionModeSel { get; set; }
+		AppKit.NSComboBox questionModeSel { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSComboBox sessionListSel { get; set; }
+		AppKit.NSComboBox sessionListSel { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSButton startBtn { get; set; }
+		AppKit.NSButton startBtn { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSTextField titleEdt { get; set; }
+		AppKit.NSTextField titleEdt { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSComboBox ublogRoomSel { get; set; }
+		AppKit.NSComboBox ublogRoomSel { get; set; }
 
 		[Outlet]
-		MonoMac.AppKit.NSButton visibleChk { get; set; }
+		AppKit.NSButton visibleChk { get; set; }
 
 		[Action ("newSessionBtn_Click:")]
-		partial void newSessionBtn_Click (MonoMac.Foundation.NSObject sender);
+		partial void newSessionBtn_Click (Foundation.NSObject sender);
 
 		[Action ("onCancel:")]
-		partial void onCancel (MonoMac.Foundation.NSObject sender);
+		partial void onCancel (Foundation.NSObject sender);
 
 		[Action ("OnGrabScreen:")]
-		partial void OnGrabScreen (MonoMac.AppKit.NSButton sender);
+		partial void OnGrabScreen (AppKit.NSButton sender);
 
 		[Action ("OnListSelection:")]
-		partial void OnListSelection (MonoMac.Foundation.NSObject sender);
+		partial void OnListSelection (Foundation.NSObject sender);
 
 		[Action ("onOK:")]
-		partial void onOK (MonoMac.Foundation.NSObject sender);
+		partial void onOK (Foundation.NSObject sender);
 
 		[Action ("OnSelectSession:")]
-		partial void OnSelectSession (MonoMac.Foundation.NSObject sender);
+		partial void OnSelectSession (Foundation.NSObject sender);
 
 		[Action ("settingChanged:")]
-		partial void settingChanged (MonoMac.Foundation.NSObject sender);
+		partial void settingChanged (Foundation.NSObject sender);
 
 		[Action ("startBtn_Click:")]
-		partial void startBtn_Click (MonoMac.Foundation.NSObject sender);
+		partial void startBtn_Click (Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
