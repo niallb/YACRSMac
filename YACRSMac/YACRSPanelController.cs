@@ -53,6 +53,11 @@ namespace YACRSMac
         {
             YACRSPanel tmp = this.Window;
             tmp.Controller = this;
+
+            grapgBtn.ToolTip = "Show Graph";
+            newQuBtn.ToolTip = "Start Next Question";
+            ExpandBtn.ToolTip = "More Details";            
+
             newQuBtn.Image = NSImage.ImageNamed("qmark.png");
             grapgBtn.Image = NSImage.ImageNamed("graph.png");
             // Changes to allow graph window at start
@@ -156,6 +161,7 @@ namespace YACRSMac
             {
                 //newQuBtn.Image = (Image)Properties.Resources.ResourceManager.GetObject("stop");
                 newQuBtn.Image = NSImage.ImageNamed("stop.png");
+                newQuBtn.ToolTip = "Stop Question";
                 //grapgBtn.Enabled = false;
             }
             else
@@ -163,6 +169,7 @@ namespace YACRSMac
 
                 //newQuBtn.Image = (Image)Properties.Resources.ResourceManager.GetObject("qmark");
                 newQuBtn.Image = NSImage.ImageNamed("qmark.png");
+                newQuBtn.ToolTip = "Start Next Question";
                 if (YACRSSession.Instance.LastQuInstanceID > 0)
                 {
                     grapgBtn.Enabled = true;
