@@ -9,7 +9,7 @@
     <RootNamespace>YACRSMac</RootNamespace>
     <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
     <AssemblyName>YACRSMac</AssemblyName>
-    <ReleaseVersion>1.2.20170921</ReleaseVersion>
+    <ReleaseVersion>1.2b.20190927</ReleaseVersion>
     <SignAssembly>true</SignAssembly>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseXamMacFullFramework>true</UseXamMacFullFramework>
@@ -35,6 +35,7 @@
     <LinkMode>None</LinkMode>
     <CodeSigningKey>Mac Developer</CodeSigningKey>
     <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
+    <AOTMode>None</AOTMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -54,9 +55,9 @@
     <LinkMode>None</LinkMode>
     <HttpClientHandler>HttpClientHandler</HttpClientHandler>
     <TlsProvider>Default</TlsProvider>
+    <AOTMode>None</AOTMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|AnyCPU' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\AppStore</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -68,12 +69,13 @@
     <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
     <CreatePackage>true</CreatePackage>
     <CodeSigningKey>Mac Developer: Niall Barr (UY9BHSM7E7)</CodeSigningKey>
-    <EnableCodeSigning>true</EnableCodeSigning>
+    <EnableCodeSigning>false</EnableCodeSigning>
     <EnablePackageSigning>false</EnablePackageSigning>
     <UseRefCounting>false</UseRefCounting>
     <Profiling>false</Profiling>
     <HttpClientHandler>HttpClientHandler</HttpClientHandler>
     <TlsProvider>Default</TlsProvider>
+    <AOTMode>None</AOTMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Installer_no_mono|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -94,6 +96,7 @@
     <Profiling>false</Profiling>
     <HttpClientHandler>HttpClientHandler</HttpClientHandler>
     <TlsProvider>Default</TlsProvider>
+    <AOTMode>None</AOTMode>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

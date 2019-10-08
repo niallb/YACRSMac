@@ -114,48 +114,51 @@ namespace YACRSMac
 
         public void setData(cls_questionResponseInfo ri)
         {
-            cqid = ri.M_id; 
-            theGraph.title = ri.M_questiontype;
-
-            //quWebInfo.Hidden = false;
-            //quWebInfo.MainFrameUrl = "http://www.gla.ac.uk/";
-
-            Dictionary<string, int> data = new Dictionary<string, int> ();
-
-            if ((ri.M_displayURL != null) && (ri.M_displayURL != "")) 
+            if (ri != null)
             {
-                quWebInfo.Hidden = false;
-                theGraph.Hidden = true;
-                quWebInfo.MainFrameUrl = YACRSSession.Instance.baseURL + ri.M_displayURL;
-            } 
-            else 
-            {
-                quWebInfo.Hidden = true;
-                theGraph.Hidden = false;
-                foreach (cls_optionInfo oi in ri.M_optionInfo) 
+                cqid = ri.M_id;
+                theGraph.title = ri.M_questiontype;
+
+                //quWebInfo.Hidden = false;
+                //quWebInfo.MainFrameUrl = "http://www.gla.ac.uk/";
+
+                Dictionary<string, int> data = new Dictionary<string, int>();
+
+                if ((ri.M_displayURL != null) && (ri.M_displayURL != ""))
                 {
-                    if (!data.ContainsKey (oi.M_title)) 
+                    quWebInfo.Hidden = false;
+                    theGraph.Hidden = true;
+                    quWebInfo.MainFrameUrl = YACRSSession.Instance.baseURL + ri.M_displayURL;
+                }
+                else
+                {
+                    quWebInfo.Hidden = true;
+                    theGraph.Hidden = false;
+                    foreach (cls_optionInfo oi in ri.M_optionInfo)
                     {
-                        data.Add (oi.M_title, oi.M_count);
+                        if (!data.ContainsKey(oi.M_title))
+                        {
+                            data.Add(oi.M_title, oi.M_count);
+                        }
                     }
                 }
-            }
-            theGraph.theData = data;
-            backBtn.Enabled = false;
-            forwardBtn.Enabled = false;
-            if ((quids != null) && (quids.Count > 1))
-            {
-                if (cqid != quids[0])
-                    backBtn.Enabled = true;
-                if (cqid != quids[quids.Count - 1])
-                    forwardBtn.Enabled = true;
-            }
-            if (!theGraph.Hidden) 
-            {
-                theGraph.Display ();
+                theGraph.theData = data;
+                backBtn.Enabled = false;
+                forwardBtn.Enabled = false;
+                if ((quids != null) && (quids.Count > 1))
+                {
+                    if (cqid != quids[0])
+                        backBtn.Enabled = true;
+                    if (cqid != quids[quids.Count - 1])
+                        forwardBtn.Enabled = true;
+                }
+                if (!theGraph.Hidden)
+                {
+                    theGraph.Display();
 
-            }//theGraph.DrawRect(new System.Drawing.RectangleF(theGraph.Frame.Location, theGraph.Frame.Size));
-            //Invalidate();
+                }//theGraph.DrawRect(new System.Drawing.RectangleF(theGraph.Frame.Location, theGraph.Frame.Size));
+                 //Invalidate();
+            }
         }
 
 

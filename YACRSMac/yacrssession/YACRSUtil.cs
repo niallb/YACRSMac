@@ -8,7 +8,6 @@ using System.Runtime.InteropServices;
 using ObjCRuntime;
 
 using CoreGraphics;
-using CoreGraphics;
 //using System.Drawing.Imaging;
 
 namespace YACRScontrol
@@ -25,6 +24,7 @@ namespace YACRScontrol
         public YACRSUtil()
         {
         }
+
         public const string CoreGraphicsLibrary = "/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreGraphics.framework/CoreGraphics";
 
         public static CGImage ScreenImage2 (int windownumber, CGRect bounds, CGWindowListOption windowOption, CGWindowImageOption imageOption)

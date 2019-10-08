@@ -1,0 +1,41 @@
+﻿<Properties StartupConfiguration="{E8CBD55F-1122-4C57-8C2F-9B2A808DA865}|Default">
+  <MonoDevelop.Ide.ItemProperties.YACRSMac PreferredExecutionTarget="Test1" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="YACRSMac/yacrssession/YACRSUtil.cs">
+    <Files>
+      <File FileName="YACRSMac/yacrssession/YACRSUtil.cs" Line="27" Column="1" />
+      <File FileName="YACRSMac/yacrssession/YACRSSession.cs" />
+      <File FileName="YACRSMac/Main.cs" />
+      <File FileName="YACRSMac/YACRSPanel.cs" />
+      <File FileName="YACRSMac/YACRSPanelController.cs" />
+      <File FileName="YACRSMac/AppDelegate.cs" />
+      <File FileName="YACRSMac/MainWindowController.cs" />
+      <File FileName="YACRSMac/MainWindow.cs" />
+      <File FileName="YACRSMac/GlobalSuppressions.cs" />
+      <File FileName="YACRSMac/MainMenu.xib" />
+      <File FileName="YACRSMac/loginForm3.designer.cs" />
+      <File FileName="YACRSMac/graphView.cs" />
+      <File FileName="YACRSMac/graphDisplayController.cs" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="YACRSMac" expanded="True">
+            <Node name="YACRSMac" expanded="True">
+              <Node name="yacrssession" expanded="True">
+                <Node name="YACRSUtil.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <Debugger.DebugSourceFolders />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <AuthorInfo Name="Niall Barr" Email="niall.barr@glasgow.ac.uk" Copyright="" Company="University of Glasgow" Trademark="" />
+</Properties>
